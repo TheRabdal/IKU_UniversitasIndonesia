@@ -4,11 +4,14 @@ class SidebarProvider extends ChangeNotifier {
   bool _isCollapsed = false;
   bool _isHidden = false;
   int _selectedIndex = 0;
+  int _previousIndex = 0;
   int? _hoveredIndex;
 
   bool get isCollapsed => _isCollapsed;
   bool get isHidden => _isHidden;
   int get selectedIndex => _selectedIndex;
+  int get previousIndex => _previousIndex;
+  bool get isSlidingUp => _selectedIndex >= _previousIndex;
   int? get hoveredIndex => _hoveredIndex;
 
   void toggleCollapse() {
@@ -32,6 +35,7 @@ class SidebarProvider extends ChangeNotifier {
   }
 
   void setSelectedIndex(int index) {
+    _previousIndex = _selectedIndex;
     _selectedIndex = index;
     notifyListeners();
   }

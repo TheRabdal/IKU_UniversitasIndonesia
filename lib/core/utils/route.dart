@@ -11,53 +11,60 @@ class AppRoutes {
   static const String profile = '/profile';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    Widget page;
     switch (settings.name) {
       case login:
-        return MaterialPageRoute(
-          builder: (_) => const LoginPage(),
-          settings: settings,
-        );
+        page = const LoginPage();
+        break;
       case dashboard:
-        return MaterialPageRoute(
-          builder: (_) => const DashboardPage(),
-          settings: settings,
-        );
+        page = const DashboardPage();
+        break;
       case indikator:
-        return MaterialPageRoute(
-          builder: (_) => const IndikatorPage(),
-          settings: settings,
-        );
+        page = const IndikatorPage();
+        break;
       case audit:
-        return MaterialPageRoute(
-          builder: (_) => const AuditPage(),
-          settings: settings,
-        );
+        page = const AuditPage();
+        break;
       case laporan:
-        return MaterialPageRoute(
-          builder: (_) => const LaporanPage(),
-          settings: settings,
-        );
+        page = const LaporanPage();
+        break;
       case simulasi:
-        return MaterialPageRoute(
-          builder: (_) => const SimulasiPage(),
-          settings: settings,
-        );
+        page = const SimulasiPage();
+        break;
       case setting:
-        return MaterialPageRoute(
-          builder: (_) => const SettingPage(),
-          settings: settings,
-        );
+        page = const SettingPage();
+        break;
       case profile:
-        return MaterialPageRoute(
-          builder: (_) => const ProfilePage(),
-          settings: settings,
-        );
+        page = const ProfilePage();
+        break;
       default:
-        return MaterialPageRoute(
-          builder: (_) => const DashboardPage(),
-          settings: settings,
-        );
+        page = const DashboardPage();
+        break;
     }
+
+    return PageRouteBuilder(
+      settings: settings,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.08, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.easeInOutCubic;
+        final tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        final offsetAnimation = animation.drive(tween);
+        final fadeAnimation =
+            CurvedAnimation(parent: animation, curve: Curves.easeInOut);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: FadeTransition(
+            opacity: fadeAnimation,
+            child: child,
+          ),
+        );
+      },
+    );
   }
 
   static Map<String, WidgetBuilder> get routes => {

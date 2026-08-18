@@ -43,13 +43,16 @@ class DashboardPage extends StatelessWidget {
                           break;
                       }
 
+                      final bool isSlidingUp = sidebar.isSlidingUp;
+                      final double beginY = isSlidingUp ? 0.08 : -0.08;
+
                       return AnimatedSwitcher(
                         duration: const Duration(milliseconds: 320),
                         switchInCurve: Curves.easeOutCubic,
                         switchOutCurve: Curves.easeInCubic,
                         transitionBuilder: (child, animation) {
                           final slideAnimation = Tween<Offset>(
-                            begin: const Offset(0.06, 0.0),
+                            begin: Offset(0.0, beginY),
                             end: Offset.zero,
                           ).animate(animation);
 
