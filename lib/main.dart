@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'IKU UI - Indikator Kinerja Utama',
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.dashboard,
+        initialRoute: AppRoutes.login,
         onGenerateRoute: AppRoutes.onGenerateRoute,
       ),
     );
