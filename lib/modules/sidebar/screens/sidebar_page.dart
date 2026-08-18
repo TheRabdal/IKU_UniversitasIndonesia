@@ -64,7 +64,7 @@ class SidebarPage extends StatelessWidget {
                       onTap: () {
                         sidebar.setSelectedIndex(index);
                         if (index == 0) {
-                          appBar.setTitle('Indikator Kinerja Utama');
+                          appBar.setTitle('Dashboard');
                         } else if (index == 1) {
                           appBar.setTitle('Audit Indikator Kinerja Utama');
                         }
@@ -74,7 +74,7 @@ class SidebarPage extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 decoration: const BoxDecoration(
                   border: Border(
                     top: BorderSide(
@@ -83,38 +83,65 @@ class SidebarPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: Row(
-                  mainAxisAlignment: sidebar.isCollapsed
-                      ? MainAxisAlignment.center
-                      : MainAxisAlignment.spaceBetween,
-                  children: [
-                    if (!sidebar.isCollapsed)
-                      IconButton(
-                        icon: const Icon(
-                          Icons.visibility_off_outlined,
-                          color: Color(0xFF888888),
-                          size: 18,
-                        ),
-                        tooltip: 'Hide Sidebar',
-                        splashRadius: 18,
-                        onPressed: sidebar.toggleHidden,
+                child: sidebar.isCollapsed
+                    ? Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.chevron_right_rounded,
+                              color: Color(0xFF888888),
+                              size: 20,
+                            ),
+                            tooltip: 'Expand Sidebar (v0.0.1)',
+                            splashRadius: 18,
+                            onPressed: sidebar.toggleCollapse,
+                          ),
+                          const SizedBox(height: 2),
+                          const Text(
+                            'v0.0.1',
+                            style: TextStyle(
+                              color: Color(0xFF666666),
+                              fontSize: 9,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.visibility_off_outlined,
+                              color: Color(0xFF888888),
+                              size: 18,
+                            ),
+                            tooltip: 'Hide Sidebar',
+                            splashRadius: 18,
+                            onPressed: sidebar.toggleHidden,
+                          ),
+                          const Text(
+                            'v0.0.1',
+                            style: TextStyle(
+                              color: Color(0xFF666666),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.chevron_left_rounded,
+                              color: Color(0xFF888888),
+                              size: 20,
+                            ),
+                            tooltip: 'Collapse Sidebar',
+                            splashRadius: 18,
+                            onPressed: sidebar.toggleCollapse,
+                          ),
+                        ],
                       ),
-                    IconButton(
-                      icon: Icon(
-                        sidebar.isCollapsed
-                            ? Icons.chevron_right_rounded
-                            : Icons.chevron_left_rounded,
-                        color: const Color(0xFF888888),
-                        size: 20,
-                      ),
-                      tooltip: sidebar.isCollapsed
-                          ? 'Expand Sidebar'
-                          : 'Collapse Sidebar',
-                      splashRadius: 18,
-                      onPressed: sidebar.toggleCollapse,
-                    ),
-                  ],
-                ),
               ),
             ],
           ),

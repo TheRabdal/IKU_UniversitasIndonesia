@@ -11,13 +11,21 @@ class DashboardPage extends StatelessWidget {
         children: [
           const SidebarPage(),
           Expanded(
-            child: Consumer<SidebarProvider>(
-              builder: (context, sidebar, _) {
-                if (sidebar.selectedIndex == 1) {
-                  return const AuditPage();
-                }
-                return const DashboardContent();
-              },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const AppbarPage(),
+                Expanded(
+                  child: Consumer<SidebarProvider>(
+                    builder: (context, sidebar, _) {
+                      if (sidebar.selectedIndex == 1) {
+                        return const AuditPage();
+                      }
+                      return const DashboardContent();
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ],

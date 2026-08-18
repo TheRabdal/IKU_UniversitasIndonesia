@@ -45,6 +45,8 @@ class AppbarPage extends StatelessWidget implements PreferredSizeWidget {
                 const SizedBox(width: 12),
               ],
               const AppBarTitle(),
+              const Spacer(),
+              const AppBarProfile(),
             ],
           ),
         );
