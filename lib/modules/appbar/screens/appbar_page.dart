@@ -4,53 +4,48 @@ class AppbarPage extends StatelessWidget implements PreferredSizeWidget {
   const AppbarPage({super.key});
 
   @override
-  Size get preferredSize => const Size.fromHeight(80);
-
-  static const List<NavMenuItemModel> _menuItems = [
-    NavMenuItemModel(title: 'Home'),
-    NavMenuItemModel(title: 'Sub Direktorat'),
-  ];
+  Size get preferredSize => const Size.fromHeight(70);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppBarProvider>(
-      builder: (context, appBar, _) {
-        return AppBar(
-          backgroundColor: const Color(0xFF1A1A1A),
-          elevation: 0,
-          toolbarHeight: 80,
-          titleSpacing: 0,
-          automaticallyImplyLeading: false,
-          title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset(
-                  'assets/logo/logo_universitasindonesia.png',
-                  height: 60,
-                  fit: BoxFit.contain,
-                ),
-                const Spacer(),
-                const AppBarSearchBar(),
-                if (!appBar.searchExpanded) ...[
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(_menuItems.length, (index) {
-                      final item = _menuItems[index];
-                      return NavMenuItem(
-                        label: item.title,
-                        isHovered: appBar.hoveredIndex == index,
-                        onHover: (hovered) {
-                          appBar.setHoveredIndex(hovered ? index : null);
-                        },
-                        onTap: () {},
-                      );
-                    }),
-                  ),
-                ],
-              ],
+    return Consumer<SidebarProvider>(
+      builder: (context, sidebar, _) {
+        return Container(
+          height: 70,
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            border: Border(
+              bottom: BorderSide(
+                color: Color(0xFFEADBBE),
+                width: 1.5,
+              ),
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x08000000),
+                blurRadius: 10,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              if (sidebar.isHidden) ...[
+                IconButton(
+                  icon: const Icon(
+                    Icons.menu_rounded,
+                    color: Color(0xFF8C6D1F),
+                    size: 22,
+                  ),
+                  tooltip: 'Tampilkan Sidebar',
+                  splashRadius: 20,
+                  onPressed: sidebar.toggleHidden,
+                ),
+                const SizedBox(width: 12),
+              ],
+              const AppBarTitle(),
+            ],
           ),
         );
       },
