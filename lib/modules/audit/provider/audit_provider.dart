@@ -139,4 +139,9 @@ class AuditProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void addAuditItem(AuditItemModel item) {
+    _auditList.insert(0, item);
+    notifyListeners();
+  }
 }

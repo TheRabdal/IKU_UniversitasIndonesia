@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SettingProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ChangeNotifierProvider(create: (_) => IndikatorProvider()),
+        ChangeNotifierProvider(create: (_) => LaporanProvider()),
+        ChangeNotifierProvider(create: (_) => SimulasiProvider()),
       ],
       child: MaterialApp(
         title: 'IKU UI - Indikator Kinerja Utama',

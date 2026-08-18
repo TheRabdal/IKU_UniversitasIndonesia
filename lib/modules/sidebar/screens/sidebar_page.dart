@@ -16,6 +16,14 @@ class SidebarPage extends StatelessWidget {
       title: 'Audit',
       icon: Icons.fact_check_rounded,
     ),
+    SidebarItemModel(
+      title: 'Laporan',
+      icon: Icons.assessment_outlined,
+    ),
+    SidebarItemModel(
+      title: 'Simulasi',
+      icon: Icons.insights_rounded,
+    ),
   ];
 
   @override
@@ -73,6 +81,10 @@ class SidebarPage extends StatelessWidget {
                           appBar.setTitle('8 Indikator Kinerja Utama (IKU)');
                         } else if (index == 2) {
                           appBar.setTitle('Audit Indikator Kinerja Utama');
+                        } else if (index == 3) {
+                          appBar.setTitle('Laporan & Rekapitulasi Capaian IKU');
+                        } else if (index == 4) {
+                          appBar.setTitle('Simulasi Proyeksi Capaian IKU');
                         }
                       },
                     );

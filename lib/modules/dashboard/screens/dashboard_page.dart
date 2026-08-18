@@ -25,9 +25,15 @@ class DashboardPage extends StatelessWidget {
                         return const AuditPage();
                       }
                       if (sidebar.selectedIndex == 3) {
-                        return const SettingPage();
+                        return const LaporanPage();
                       }
                       if (sidebar.selectedIndex == 4) {
+                        return const SimulasiPage();
+                      }
+                      if (sidebar.selectedIndex == 5) {
+                        return const SettingPage();
+                      }
+                      if (sidebar.selectedIndex == 6) {
                         return const ProfilePage();
                       }
                       return const DashboardContent();

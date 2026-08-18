@@ -1,7 +1,7 @@
 import 'package:indikatorkinerjautama_ui/packages/packages.dart';
 
-class AuditPage extends StatelessWidget {
-  const AuditPage({super.key});
+class SimulasiPage extends StatelessWidget {
+  const SimulasiPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class AuditPage extends StatelessWidget {
                       ),
                     ),
                     child: const Icon(
-                      Icons.fact_check_rounded,
+                      Icons.insights_rounded,
                       color: Color(0xFFB8860B),
                       size: 28,
                     ),
@@ -56,7 +56,7 @@ class AuditPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          'Audit & Verifikasi Bukti Dukung IKU',
+                          'Simulasi Proyeksi Capaian IKU (What-If Analysis)',
                           style: TextStyle(
                             color: Color(0xFF22201C),
                             fontSize: 20,
@@ -66,7 +66,7 @@ class AuditPage extends StatelessWidget {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'Evaluasi berkas bukti capaian indikator kinerja utama per fakultas Universitas Indonesia',
+                          'Kalkulator skenario untuk memproyeksikan skor kinerja dan estimasi insentif PTN-BH UI',
                           style: TextStyle(
                             color: Color(0xFF777777),
                             fontSize: 13,
@@ -75,81 +75,28 @@ class AuditPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFB8860B),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 18,
-                        vertical: 12,
-                      ),
-                    ),
-                    icon: const Icon(Icons.cloud_upload_outlined, size: 20),
-                    label: const Text(
-                      'Unggah Bukti IKU',
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (_) => const AuditUploadDialog(),
-                      );
-                    },
-                  ),
                 ],
               ),
             ),
             const SizedBox(height: 24),
-            const AuditStatSummary(),
+            const SimulasiScoreCard(),
             const SizedBox(height: 24),
-            const AuditFilterBar(),
-            const SizedBox(height: 18),
-            Consumer<AuditProvider>(
+            Consumer<SimulasiProvider>(
               builder: (context, provider, _) {
-                final list = provider.filteredList;
-
-                if (list.isEmpty) {
-                  return Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(40),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: const Color(0xFFEADBBE)),
-                    ),
-                    child: Center(
-                      child: Column(
-                        children: const [
-                          Icon(
-                            Icons.inbox_outlined,
-                            size: 48,
-                            color: Color(0xFFCCCCCC),
-                          ),
-                          SizedBox(height: 12),
-                          Text(
-                            'Tidak ada berkas pada kategori ini',
-                            style: TextStyle(
-                              color: Color(0xFF888888),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
+                final list = provider.simulasiList;
 
                 return ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: list.length,
                   itemBuilder: (context, index) {
-                    return AuditCardTile(item: list[index]);
+                    return SimulasiSliderCard(
+                      index: index,
+                      item: list[index],
+                      onChanged: (val) {
+                        provider.updateProjected(index, val);
+                      },
+                    );
                   },
                 );
               },

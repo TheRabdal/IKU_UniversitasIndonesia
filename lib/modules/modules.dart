@@ -6,3 +6,5 @@ export 'audit/audit.dart';
 export 'setting/setting.dart';
 export 'profile/profile.dart';
 export 'indikator/indikator.dart';
+export 'laporan/laporan.dart';
+export 'simulasi/simulasi.dart';

@@ -4,6 +4,8 @@ class AppRoutes {
   static const String dashboard = '/';
   static const String indikator = '/indikator';
   static const String audit = '/audit';
+  static const String laporan = '/laporan';
+  static const String simulasi = '/simulasi';
   static const String setting = '/setting';
   static const String profile = '/profile';
 
@@ -22,6 +24,16 @@ class AppRoutes {
       case audit:
         return MaterialPageRoute(
           builder: (_) => const AuditPage(),
+          settings: settings,
+        );
+      case laporan:
+        return MaterialPageRoute(
+          builder: (_) => const LaporanPage(),
+          settings: settings,
+        );
+      case simulasi:
+        return MaterialPageRoute(
+          builder: (_) => const SimulasiPage(),
           settings: settings,
         );
       case setting:
@@ -46,6 +58,8 @@ class AppRoutes {
         dashboard: (_) => const DashboardPage(),
         indikator: (_) => const IndikatorPage(),
         audit: (_) => const AuditPage(),
+        laporan: (_) => const LaporanPage(),
+        simulasi: (_) => const SimulasiPage(),
         setting: (_) => const SettingPage(),
         profile: (_) => const ProfilePage(),
       };
