@@ -2,6 +2,7 @@ import 'package:indikatorkinerjautama_ui/packages/packages.dart';
 
 class AppProviders {
   static List<SingleChildWidget> get providers => [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => SidebarProvider()),
         ChangeNotifierProvider(create: (_) => SearchProvider()),
         ChangeNotifierProvider(create: (_) => AppBarProvider()),

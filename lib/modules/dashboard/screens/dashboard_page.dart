@@ -18,25 +18,56 @@ class DashboardPage extends StatelessWidget {
                 Expanded(
                   child: Consumer<SidebarProvider>(
                     builder: (context, sidebar, _) {
-                      if (sidebar.selectedIndex == 1) {
-                        return const IndikatorPage();
+                      Widget page;
+                      switch (sidebar.selectedIndex) {
+                        case 1:
+                          page = const IndikatorPage(key: ValueKey('indikator'));
+                          break;
+                        case 2:
+                          page = const AuditPage(key: ValueKey('audit'));
+                          break;
+                        case 3:
+                          page = const LaporanPage(key: ValueKey('laporan'));
+                          break;
+                        case 4:
+                          page = const SimulasiPage(key: ValueKey('simulasi'));
+                          break;
+                        case 5:
+                          page = const SettingPage(key: ValueKey('setting'));
+                          break;
+                        case 6:
+                          page = const ProfilePage(key: ValueKey('profile'));
+                          break;
+                        default:
+                          page = const DashboardContent(key: ValueKey('dashboard'));
+                          break;
                       }
-                      if (sidebar.selectedIndex == 2) {
-                        return const AuditPage();
-                      }
-                      if (sidebar.selectedIndex == 3) {
-                        return const LaporanPage();
-                      }
-                      if (sidebar.selectedIndex == 4) {
-                        return const SimulasiPage();
-                      }
-                      if (sidebar.selectedIndex == 5) {
-                        return const SettingPage();
-                      }
-                      if (sidebar.selectedIndex == 6) {
-                        return const ProfilePage();
-                      }
-                      return const DashboardContent();
+
+                      return AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 320),
+                        switchInCurve: Curves.easeOutCubic,
+                        switchOutCurve: Curves.easeInCubic,
+                        transitionBuilder: (child, animation) {
+                          final slideAnimation = Tween<Offset>(
+                            begin: const Offset(0.06, 0.0),
+                            end: Offset.zero,
+                          ).animate(animation);
+
+                          final fadeAnimation = CurvedAnimation(
+                            parent: animation,
+                            curve: Curves.easeInOut,
+                          );
+
+                          return SlideTransition(
+                            position: slideAnimation,
+                            child: FadeTransition(
+                              opacity: fadeAnimation,
+                              child: child,
+                            ),
+                          );
+                        },
+                        child: page,
+                      );
                     },
                   ),
                 ),

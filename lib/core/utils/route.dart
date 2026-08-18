@@ -1,6 +1,7 @@
 import 'package:indikatorkinerjautama_ui/packages/packages.dart';
 
 class AppRoutes {
+  static const String login = '/login';
   static const String dashboard = '/';
   static const String indikator = '/indikator';
   static const String audit = '/audit';
@@ -11,6 +12,11 @@ class AppRoutes {
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case login:
+        return MaterialPageRoute(
+          builder: (_) => const LoginPage(),
+          settings: settings,
+        );
       case dashboard:
         return MaterialPageRoute(
           builder: (_) => const DashboardPage(),
@@ -55,6 +61,7 @@ class AppRoutes {
   }
 
   static Map<String, WidgetBuilder> get routes => {
+        login: (_) => const LoginPage(),
         dashboard: (_) => const DashboardPage(),
         indikator: (_) => const IndikatorPage(),
         audit: (_) => const AuditPage(),

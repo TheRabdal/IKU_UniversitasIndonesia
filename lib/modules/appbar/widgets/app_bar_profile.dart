@@ -64,6 +64,12 @@ class AppBarProfile extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.pop(ctx);
+                    context.read<AuthProvider>().logout();
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.login,
+                      (route) => false,
+                    );
                   },
                   child: const Text('Logout'),
                 ),
