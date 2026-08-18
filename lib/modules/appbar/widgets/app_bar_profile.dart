@@ -18,7 +18,13 @@ class AppBarProfile extends StatelessWidget {
       color: Colors.white,
       elevation: 8,
       onSelected: (value) {
-        if (value == 'logout') {
+        if (value == 'profile') {
+          context.read<SidebarProvider>().setSelectedIndex(4);
+          context.read<AppBarProvider>().setTitle('Profil Pengguna');
+        } else if (value == 'settings') {
+          context.read<SidebarProvider>().setSelectedIndex(3);
+          context.read<AppBarProvider>().setTitle('Pengaturan Sistem');
+        } else if (value == 'logout') {
           showDialog(
             context: context,
             builder: (ctx) => AlertDialog(

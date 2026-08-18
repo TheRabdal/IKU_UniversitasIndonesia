@@ -9,6 +9,10 @@ class SidebarPage extends StatelessWidget {
       icon: Icons.dashboard_rounded,
     ),
     SidebarItemModel(
+      title: 'Indikator IKU',
+      icon: Icons.auto_graph_rounded,
+    ),
+    SidebarItemModel(
       title: 'Audit',
       icon: Icons.fact_check_rounded,
     ),
@@ -66,6 +70,8 @@ class SidebarPage extends StatelessWidget {
                         if (index == 0) {
                           appBar.setTitle('Dashboard');
                         } else if (index == 1) {
+                          appBar.setTitle('8 Indikator Kinerja Utama (IKU)');
+                        } else if (index == 2) {
                           appBar.setTitle('Audit Indikator Kinerja Utama');
                         }
                       },

@@ -1,7 +1,7 @@
 import 'package:indikatorkinerjautama_ui/packages/packages.dart';
 
-class AuditPage extends StatelessWidget {
-  const AuditPage({super.key});
+class IndikatorPage extends StatelessWidget {
+  const IndikatorPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class AuditPage extends StatelessWidget {
                       ),
                     ),
                     child: const Icon(
-                      Icons.fact_check_rounded,
+                      Icons.auto_graph_rounded,
                       color: Color(0xFFB8860B),
                       size: 28,
                     ),
@@ -56,7 +56,7 @@ class AuditPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          'Audit & Verifikasi Bukti Dukung IKU',
+                          '8 Indikator Kinerja Utama (IKU)',
                           style: TextStyle(
                             color: Color(0xFF22201C),
                             fontSize: 20,
@@ -66,7 +66,7 @@ class AuditPage extends StatelessWidget {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'Evaluasi berkas bukti capaian indikator kinerja utama per fakultas Universitas Indonesia',
+                          'Standar Pengukuran Kinerja Perguruan Tinggi Kemendikbudristek & PTN-BH UI',
                           style: TextStyle(
                             color: Color(0xFF777777),
                             fontSize: 13,
@@ -79,52 +79,34 @@ class AuditPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            const AuditStatSummary(),
-            const SizedBox(height: 24),
-            const AuditFilterBar(),
-            const SizedBox(height: 18),
-            Consumer<AuditProvider>(
+            const IndikatorFilterBar(),
+            const SizedBox(height: 20),
+            Consumer<IndikatorProvider>(
               builder: (context, provider, _) {
-                final list = provider.filteredList;
+                final list = provider.filteredIndikatorList;
 
-                if (list.isEmpty) {
-                  return Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(40),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: const Color(0xFFEADBBE)),
-                    ),
-                    child: Center(
-                      child: Column(
-                        children: const [
-                          Icon(
-                            Icons.inbox_outlined,
-                            size: 48,
-                            color: Color(0xFFCCCCCC),
-                          ),
-                          SizedBox(height: 12),
-                          Text(
-                            'Tidak ada berkas pada kategori ini',
-                            style: TextStyle(
-                              color: Color(0xFF888888),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    final int crossAxisCount = constraints.maxWidth > 1200
+                        ? 4
+                        : (constraints.maxWidth > 750 ? 2 : 1);
+
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: 18,
+                        mainAxisSpacing: 18,
+                        mainAxisExtent: 260,
                       ),
-                    ),
-                  );
-                }
-
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    return AuditCardTile(item: list[index]);
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        return IndikatorCard(
+                          item: list[index],
+                        );
+                      },
+                    );
                   },
                 );
               },

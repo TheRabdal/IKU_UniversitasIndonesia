@@ -19,7 +19,16 @@ class DashboardPage extends StatelessWidget {
                   child: Consumer<SidebarProvider>(
                     builder: (context, sidebar, _) {
                       if (sidebar.selectedIndex == 1) {
+                        return const IndikatorPage();
+                      }
+                      if (sidebar.selectedIndex == 2) {
                         return const AuditPage();
+                      }
+                      if (sidebar.selectedIndex == 3) {
+                        return const SettingPage();
+                      }
+                      if (sidebar.selectedIndex == 4) {
+                        return const ProfilePage();
                       }
                       return const DashboardContent();
                     },
