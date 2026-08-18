@@ -26,16 +26,13 @@ class AppbarPage extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Logo Universitas Indonesia
                 Image.asset(
                   'assets/logo/logo_universitasindonesia.png',
                   height: 60,
                   fit: BoxFit.contain,
                 ),
                 const Spacer(),
-                // Search icon / expanded search bar
                 const AppBarSearchBar(),
-                // Navigation menu items
                 if (!appBar.searchExpanded) ...[
                   Row(
                     mainAxisSize: MainAxisSize.min,
