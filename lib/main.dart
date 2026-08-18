@@ -14,11 +14,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SidebarProvider()),
         ChangeNotifierProvider(create: (_) => SearchProvider()),
         ChangeNotifierProvider(create: (_) => AppBarProvider()),
+        ChangeNotifierProvider(create: (_) => AuditProvider()),
+        ChangeNotifierProvider(create: (_) => DashboardProvider()),
       ],
       child: MaterialApp(
         title: 'IKU UI - Indikator Kinerja Utama',
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
+        initialRoute: AppRoutes.dashboard,
+        onGenerateRoute: AppRoutes.onGenerateRoute,
       ),
     );
   }

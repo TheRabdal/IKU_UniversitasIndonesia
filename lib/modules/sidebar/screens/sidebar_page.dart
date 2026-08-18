@@ -5,17 +5,19 @@ class SidebarPage extends StatelessWidget {
 
   static const List<SidebarItemModel> _menuItems = [
     SidebarItemModel(
-      title: 'Home',
-      icon: Icons.home_rounded,
+      title: 'Dashboard',
+      icon: Icons.dashboard_rounded,
     ),
     SidebarItemModel(
-      title: 'Sub Direktorat',
-      icon: Icons.account_tree_rounded,
+      title: 'Audit',
+      icon: Icons.fact_check_rounded,
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
+    final appBar = context.read<AppBarProvider>();
+
     return Consumer<SidebarProvider>(
       builder: (context, sidebar, _) {
         if (sidebar.isHidden) {
@@ -61,6 +63,11 @@ class SidebarPage extends StatelessWidget {
                       },
                       onTap: () {
                         sidebar.setSelectedIndex(index);
+                        if (index == 0) {
+                          appBar.setTitle('Indikator Kinerja Utama');
+                        } else if (index == 1) {
+                          appBar.setTitle('Audit Indikator Kinerja Utama');
+                        }
                       },
                     );
                   },
